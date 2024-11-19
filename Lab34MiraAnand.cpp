@@ -51,14 +51,15 @@ public:
     }
     
     // creation of a public member function, printGraph()
-    // this function will print the graph's adjacency list
+    // this function will print the graph's adjacency list that we just created above to the console
     void printGraph() 
     {
         cout << "Graph's adjacency list:" << endl;
-        for (int i = 0; i < adjList.size(); i++) {
-            cout << i << " --> ";
-            for (Pair v : adjList[i])
-                cout << "(" << v.first << ", " << v.second << ") ";
+        for (int i = 0; i < adjList.size(); i++) // for each vertex/node
+        {
+            cout << i << " --> "; // output the vertex/node #
+            for (Pair v : adjList[i]) // iterates over each of the Pairs for each vertex/node
+                cout << "(" << v.first << ", " << v.second << ") "; // v.first accesses the destination vertex/node, v.second accesses the weight value of the edge
             cout << endl;
         }
     }
@@ -66,16 +67,19 @@ public:
 
 int main() 
 {
-    // Creates a vector of graph edges/weights
-    vector<Edge> edges = {
+    // create a vector of Edge structs that will hold a list of edges
+    vector<Edge> edges = 
+    {
         // (x, y, w) —> edge from x to y having weight w
         {0,1,12},{0,2,8},{0,3,21},{2,3,6},{2,6,2},{5,6,6},{4,5,9},{2,4,4},{2,5,5}
     };
     
-    // Creates graph
+    // creates graph by using the Graph class
+    // constructor within the Graph class is utilized here
+    // edges vector is used as the argument/parameter
     Graph graph(edges);
     
-    // Prints adjacency list representation of graph
+    // printGraph() public member function call - prints the graph's adjacency list
     graph.printGraph();
     
     return 0;
