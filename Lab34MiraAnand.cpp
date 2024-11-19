@@ -26,28 +26,34 @@ public:
     // creation of a vector of vectors of Pairs to represent an adjacency list
     // the first/outer vector will hold all of the vertices/nodes
     // the second/inner vector will hold "Pairs"
-    // within these Pairs, there will be a destination vertex/node and a weight value of the edge
+    // the Pairs are made up of a destination vertex/node and a weight value of the associated edge
     vector<vector<Pair>> adjList;
     
-    // Graph Constructor
-    Graph(vector<Edge> const &edges) {
-        // resize the vector to hold SIZE elements of type vector<Edge>
+    // graph Constructor
+    // vector<Edge> is the argument/parameter of this constructor, which is a vector of Edge structs
+    Graph(vector<Edge> const &edges) 
+    {
+        // resize the vector to hold SIZE elements (to hold each individual vertex/node)
         adjList.resize(SIZE);
         
-        // add edges to the directed graph
-        for (auto &edge: edges) {
-            int src = edge.src;
-            int dest = edge.dest;
-            int weight = edge.weight;
-            // insert at the end
+        for (auto &edge: edges) // for each Edge struct in the vector
+        {
+            // access edge data and store it for our adjacency list
+            int src = edge.src; // access source vertex/node
+            int dest = edge.dest; // access destination vertex/node
+            int weight = edge.weight; // access weight value
+
+            // add an edge from src to dest along with its associated weight to the adjacency list
             adjList[src].push_back(make_pair(dest, weight));
-            // for an undirected graph, add an edge from dest to src also
+            // for an undirected graph (where edges do not have a direction), add an edge in the opposite direction from dest to src also
             adjList[dest].push_back(make_pair(src, weight));
         }
     }
     
-    // Print the graph's adjacency list
-    void printGraph() {
+    // creation of a public member function, printGraph()
+    // this function will print the graph's adjacency list
+    void printGraph() 
+    {
         cout << "Graph's adjacency list:" << endl;
         for (int i = 0; i < adjList.size(); i++) {
             cout << i << " --> ";
