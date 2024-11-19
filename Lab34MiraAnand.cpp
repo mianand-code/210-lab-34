@@ -3,19 +3,30 @@
 // IDE used: Visual Studio Code for Mac
 
 #include <iostream>
-#include <vector>
+#include <vector> // needed to use std::vector
 using namespace std;
 
-const int SIZE = 7;
+// declaration and initialization of global const variables section
+const int SIZE = 7; // represents the # of vertices/nodes in the graph
 
-struct Edge {
+struct Edge // creation of a struct named "Edge" to represent edges in the graph
+{
+    // int src - to hold a source vertex/node
+    // int dest - to hold a destination vertex/node
+    // int weight - to hold a weight value of the edge
     int src, dest, weight;
 };
-typedef pair<int, int> Pair; // Creates alias 'Pair' for the pair<int,int> data type
 
-class Graph {
+typedef pair<int, int> Pair; // creation of an alias named "Pair" that references a pair of 2 ints
+
+class Graph // creation of a class named "Graph", to represent the creation of the graph
+{
+// public member functions/methods
 public:
-    // a vector of vectors of Pairs to represent an adjacency list
+    // creation of a vector of vectors of Pairs to represent an adjacency list
+    // the first/outer vector will hold all of the vertices/nodes
+    // the second/inner vector will hold "Pairs"
+    // within these Pairs, there will be a destination vertex/node and a weight value of the edge
     vector<vector<Pair>> adjList;
     
     // Graph Constructor
@@ -47,7 +58,8 @@ public:
     }
 };
 
-int main() {
+int main() 
+{
     // Creates a vector of graph edges/weights
     vector<Edge> edges = {
         // (x, y, w) —> edge from x to y having weight w
