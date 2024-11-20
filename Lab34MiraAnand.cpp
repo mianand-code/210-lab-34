@@ -9,7 +9,7 @@
 using namespace std;
 
 // declaration and initialization of global const variables section
-const int SIZE = 7; // represents the # of vertices/nodes in the graph
+const int SIZE = 11; // represents the # of vertices/nodes in the graph
 
 struct Edge // creation of a struct named "Edge" to represent edges in the graph
 {
@@ -149,7 +149,7 @@ int main()
     vector<Edge> edges = 
     {
         // (x, y, w) —> edge from x to y having weight w
-        {0,1,12},{0,2,8},{0,3,21},{2,3,6},{2,6,2},{5,6,6},{4,5,9},{2,4,4},{2,5,5}
+        {0,1,15},{0,2,10},{0,3,25},{1,4,7},{1,5,11},{2,5,8},{2,6,12},{3,6,4},{3,7,6},{4,8,9},{5,9,5},{6,10,2},{7,8,13},{8,9,16},{9,10,14}
     };
     
     // creates graph by using the Graph class
