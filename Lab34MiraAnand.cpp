@@ -91,7 +91,7 @@ public:
             if (!visited[node]) // if the node/vertex has NOT been visited yet
             {
                 visited[node] = true; // set the visited bool to true for the node/vertex, to mark it as now visited
-                cout << node << " "; // output the node/vertex that has now been visited
+                cout << node << " "; // output the current node/vertex
             }
             
             for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
@@ -116,24 +116,24 @@ public:
         vector<bool> visited(SIZE, false); // tracks whether each node/vertex has been visited or not, via the use of a bool (true or false)
         queue<int> q; // creation of an std::queue to keep a track of the nodes/vertices
         
-        visited[start] = true;
+        visited[start] = true; // set the visited bool flag to true for the starting node/vertex
         q.push(start); // add the starting node/vertex into the queue by using .push()
         
-        cout << "BFS starting from vertex " << start << ": ";
+        cout << "BFS starting from vertex " << start << ": "; // output the starting node/vertex #
         
-        while (!q.empty()) 
+        while (!q.empty()) // while the queue is NOT empty
         {
-            int node = q.front();
-            q.pop();
-            cout << node << " ";
+            int node = q.front(); // access the front node/vertex of the queue by using .front() and store it in a variable
+            q.pop(); // remove the top node/vertex from the queue by using .pop()
+            cout << node << " "; // output the current node/vertex
             
-            for (auto &neighbor : adjList[node]) 
+            for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
             {
-                int adjNode = neighbor.first;
-                if (!visited[adjNode]) 
+                int adjNode = neighbor.first; // access the neighboring node/vertex of the current node/vertex by using .first and store it in a variable
+                if (!visited[adjNode]) // if the neighboring node/vertex has NOT been visited
                 {
-                    visited[adjNode] = true;
-                    q.push(adjNode);
+                    visited[adjNode] = true; // set the visited bool flag to true for the neighboring node/vertex
+                    q.push(adjNode); // add that node into the queue by using .push()
                 }
             }
         }
