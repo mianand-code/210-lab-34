@@ -80,25 +80,25 @@ public:
         vector<bool> visited(SIZE, false); // tracks whether each node/vertex has been visited or not, via the use of a bool (true or false)
         stack<int> s; // creation of an std::stack to keep a track of the nodes/vertices
         
-        s.push(start);
-        cout << "DFS starting from vertex " << start << ": ";
+        s.push(start); // add the starting node/vertex onto the stack by using .push()
+        cout << "DFS starting from vertex " << start << ": "; // output the starting node/vertex #
         
-        while (!s.empty()) 
+        while (!s.empty()) // while the stack is NOT empty
         {
-            int node = s.top();
-            s.pop();
+            int node = s.top(); // access the top node/vertex of the stack by using .top() and store it in a variable
+            s.pop(); // remove the top node/vertex from the stack by using .pop()
             
-            if (!visited[node]) 
+            if (!visited[node]) // if the node/vertex has NOT been visited yet
             {
-                visited[node] = true;
-                cout << node << " ";
+                visited[node] = true; // set the visited bool to true for the node/vertex, to mark it as now visited
+                cout << node << " "; // output the node/vertex that has now been visited
             }
             
-            for (auto &neighbor : adjList[node]) 
+            for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
             {
-                int adjNode = neighbor.first;
-                if (!visited[adjNode]) 
-                    s.push(adjNode);
+                int adjNode = neighbor.first; // access the neighboring node/vertex of the current node/vertex by using .first and store it in a variable
+                if (!visited[adjNode]) // if the neighboring node/vertex has NOT been visited
+                    s.push(adjNode); // add that node onto the stack by using .push()
             }
         }
         cout << endl;
@@ -113,11 +113,11 @@ public:
     // RETURNS: nothing, void function
     void BFS(int start) 
     {
-        vector<bool> visited(SIZE, false);
-        queue<int> q;
+        vector<bool> visited(SIZE, false); // tracks whether each node/vertex has been visited or not, via the use of a bool (true or false)
+        queue<int> q; // creation of an std::queue to keep a track of the nodes/vertices
         
         visited[start] = true;
-        q.push(start);
+        q.push(start); // add the starting node/vertex into the queue by using .push()
         
         cout << "BFS starting from vertex " << start << ": ";
         
