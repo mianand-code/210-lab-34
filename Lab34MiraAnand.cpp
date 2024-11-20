@@ -157,6 +157,15 @@ int main()
     
     // printGraph() public member function call - prints the graph's adjacency list
     graph.printGraph();
+
+    // short driver program to exercise the BFS & DFS functions
+    int startingVertex; // to hold the user's choice of which vertex they would like to start from for the DFS & BFS
+    // get user input for the vertex they would like to start from when performing the BFS & DFS
+    cout << "Enter the vertex you would like to start from: "; 
+    cin >> startingVertex;
+
+    graph.DFS(startingVertex); // DFS() public member function call - performs the DFS according to the user's chosen starting vertex
+    graph.BFS(startingVertex); // BFS() public member function call - performs the BFS according to the user's chosen starting vertex
     
     return 0;
 }
