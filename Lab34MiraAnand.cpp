@@ -81,7 +81,7 @@ public:
         stack<int> s; // creation of an std::stack to keep a track of the nodes/vertices
         
         s.push(start); // add the starting node/vertex onto the stack by using .push()
-        cout << "DFS starting from vertex " << start << ": "; // output the starting node/vertex #
+        cout << "DFS starting from vertex " << start << ": " << endl; // output the starting node/vertex #
         
         while (!s.empty()) // while the stack is NOT empty
         {
@@ -119,7 +119,7 @@ public:
         visited[start] = true; // set the visited bool flag to true for the starting node/vertex
         q.push(start); // add the starting node/vertex into the queue by using .push()
         
-        cout << "BFS starting from vertex " << start << ": "; // output the starting node/vertex #
+        cout << "BFS starting from vertex " << start << ": " << endl; // output the starting node/vertex #
         
         while (!q.empty()) // while the queue is NOT empty
         {
