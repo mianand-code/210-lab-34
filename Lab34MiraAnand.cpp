@@ -36,6 +36,7 @@ public:
     // the Pairs are made up of a destination vertex/node and a weight value of the associated edge
     vector<vector<Pair>> adjList;
 
+    // creation of an std::vector that will hold the names of the different areas within the airport
     vector<string> areaNames = 
     {
         "Terminal 1", "Gate A1", "Gate A2", "Terminal 2", "Lounge 1",
@@ -73,7 +74,7 @@ public:
         cout << "--------------------------" << endl;
         for (int i = 0; i < adjList.size(); i++) // for each vertex/node
         {
-            cout << "Area " << i << " (" << areaNames[i] << ") connects to:" << endl; // output the vertex/node #
+            cout << "Area " << i << " (" << areaNames[i] << ") connects to:" << endl; // output the vertex/node # and its associated area name
             for (Pair v : adjList[i]) // iterates over each of the Pairs for each vertex/node
                 cout << "  → Area " << v.first << " (" << areaNames[v.first] << ") - Walk Time: " << v.second << " minutes" << endl; // v.first accesses the destination vertex/node, v.second accesses the weight value of the edge
             cout << endl;
@@ -106,12 +107,12 @@ public:
             if (!visited[node]) // if the node/vertex has NOT been visited yet
             {
                 visited[node] = true; // set the visited bool to true for the node/vertex, to mark it as now visited
-                cout << endl << "Exploring Area " << node << " (" << areaNames[node] << ")." << endl;
+                cout << endl << "Exploring Area " << node << " (" << areaNames[node] << ")." << endl; // output the current node/vertex and its associated area name
             
                 for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
                 {
                     int adjNode = neighbor.first; // access the neighboring node/vertex of the current node/vertex by using .first and store it in a variable
-                    int weight = neighbor.second;
+                    int weight = neighbor.second; // access the edge weight of the current node/vertex by using .second and store it in a variable
                     if (!visited[adjNode]) // if the neighboring node/vertex has NOT been visited
                     {
                         cout << "  → Potential walk to Area " << adjNode << " (" << areaNames[adjNode] << ") - Walk Time: " << weight << " minutes." << endl;
@@ -146,12 +147,12 @@ public:
         {
             int node = q.front(); // access the front node/vertex of the queue by using .front() and store it in a variable
             q.pop(); // remove the top node/vertex from the queue by using .pop()
-            cout << endl << "Visiting Area " << node << " (" << areaNames[node] << ")." << endl;
+            cout << endl << "Visiting Area " << node << " (" << areaNames[node] << ")." << endl; // output the current node/vertex and its associated area name
             
             for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
             {
                 int adjNode = neighbor.first; // access the neighboring node/vertex of the current node/vertex by using .first and store it in a variable
-                int weight = neighbor.second;
+                int weight = neighbor.second; // access the edge weight of the current node/vertex by using .second and store it in a variable
                 if (!visited[adjNode]) // if the neighboring node/vertex has NOT been visited
                 {
                     cout << "  → Next reachable area: Area " << adjNode << " (" << areaNames[adjNode] << ") - Walk Time: " << weight << " minutes." << endl;
