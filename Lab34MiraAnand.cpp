@@ -2,6 +2,11 @@
 // Module 13, Lesson: Graphs, Assignment: Network Graph
 // IDE used: Visual Studio Code for Mac
 
+// Step #3 (wrapping a real-world application around the graph) was generated through an LLM via prompt engineering, as per assignment instructions
+// - The real-world application I generated through the LLM was an "airport walking network"
+// - The vertices/nodes are different areas within an airport and the edges are walking paths to these areas
+// - The weights for each edge are walking times for each path in minutes
+
 #include <iostream>
 #include <queue> // needed to use std::queue
 #include <stack> // needed to use std::stack
@@ -30,6 +35,12 @@ public:
     // the second/inner vector will hold "Pairs"
     // the Pairs are made up of a destination vertex/node and a weight value of the associated edge
     vector<vector<Pair>> adjList;
+
+    vector<string> areaNames = 
+    {
+        "Terminal 1", "Gate A1", "Gate A2", "Terminal 2", "Lounge 1",
+        "Baggage Claim", "Duty-Free Shop", "Lounge 2", "Gate B1", "Gate B2", "Food Court"
+    };
     
     // graph Constructor
     // vector<Edge> is being used as the argument/parameter of this constructor, which is a vector of Edge structs
@@ -58,12 +69,13 @@ public:
     // RETURNS: nothing, void function
     void printGraph() 
     {
-        cout << "Graph's adjacency list:" << endl;
+        cout << "Airport Walking Network:" << endl;
+        cout << "--------------------------" << endl;
         for (int i = 0; i < adjList.size(); i++) // for each vertex/node
         {
-            cout << i << " --> "; // output the vertex/node #
+            cout << "Area " << i << " (" << areaNames[i] << ") connects to:" << endl; // output the vertex/node #
             for (Pair v : adjList[i]) // iterates over each of the Pairs for each vertex/node
-                cout << "(" << v.first << ", " << v.second << ") "; // v.first accesses the destination vertex/node, v.second accesses the weight value of the edge
+                cout << "  → Area " << v.first << " (" << areaNames[v.first] << ") - Walk Time: " << v.second << " minutes" << endl; // v.first accesses the destination vertex/node, v.second accesses the weight value of the edge
             cout << endl;
         }
     }
@@ -82,7 +94,9 @@ public:
         stack<int> s; // creation of an std::stack to keep a track of the nodes/vertices
         
         s.push(start); // add the starting node/vertex onto the stack by using .push()
-        cout << "DFS starting from vertex " << start << ": " << endl; // output the starting node/vertex #
+        cout << "** Depth-First Search (DFS) Starting from Area " << start << " (" << areaNames[start] << ") **:" << endl;
+        cout << "Purpose: Exploring the connected areas of the airport." << endl;
+        cout << "----------------------------------------------------" << endl;
         
         while (!s.empty()) // while the stack is NOT empty
         {
@@ -92,14 +106,18 @@ public:
             if (!visited[node]) // if the node/vertex has NOT been visited yet
             {
                 visited[node] = true; // set the visited bool to true for the node/vertex, to mark it as now visited
-                cout << node << " "; // output the current node/vertex
-            }
+                cout << endl << "Exploring Area " << node << " (" << areaNames[node] << ")." << endl;
             
-            for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
-            {
-                int adjNode = neighbor.first; // access the neighboring node/vertex of the current node/vertex by using .first and store it in a variable
-                if (!visited[adjNode]) // if the neighboring node/vertex has NOT been visited
-                    s.push(adjNode); // add that node onto the stack by using .push()
+                for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
+                {
+                    int adjNode = neighbor.first; // access the neighboring node/vertex of the current node/vertex by using .first and store it in a variable
+                    int weight = neighbor.second;
+                    if (!visited[adjNode]) // if the neighboring node/vertex has NOT been visited
+                    {
+                        cout << "  → Potential walk to Area " << adjNode << " (" << areaNames[adjNode] << ") - Walk Time: " << weight << " minutes." << endl;
+                        s.push(adjNode); // add that node onto the stack by using .push()
+                    }  
+                } 
             }
         }
         cout << endl;
@@ -120,20 +138,23 @@ public:
         
         visited[start] = true; // set the visited bool flag to true for the starting node/vertex
         q.push(start); // add the starting node/vertex into the queue by using .push()
-        
-        cout << "BFS starting from vertex " << start << ": " << endl; // output the starting node/vertex #
+        cout << "** Breadth-First Search (BFS) Starting from Area " << start << " (" << areaNames[start] << ") **:" << endl;
+        cout << "Purpose: Analyzing all reachable areas level by level from the starting point." << endl;
+        cout << "-----------------------------------------------------------------------------" << endl;
         
         while (!q.empty()) // while the queue is NOT empty
         {
             int node = q.front(); // access the front node/vertex of the queue by using .front() and store it in a variable
             q.pop(); // remove the top node/vertex from the queue by using .pop()
-            cout << node << " "; // output the current node/vertex
+            cout << endl << "Visiting Area " << node << " (" << areaNames[node] << ")." << endl;
             
             for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes/vertices of the current node/vertex
             {
                 int adjNode = neighbor.first; // access the neighboring node/vertex of the current node/vertex by using .first and store it in a variable
+                int weight = neighbor.second;
                 if (!visited[adjNode]) // if the neighboring node/vertex has NOT been visited
                 {
+                    cout << "  → Next reachable area: Area " << adjNode << " (" << areaNames[adjNode] << ") - Walk Time: " << weight << " minutes." << endl;
                     visited[adjNode] = true; // set the visited bool flag to true for the neighboring node/vertex
                     q.push(adjNode); // add that node into the queue by using .push()
                 }
@@ -163,8 +184,9 @@ int main()
     // short driver program to exercise the BFS & DFS functions
     int startingVertex; // to hold the user's choice of which vertex they would like to start from for the DFS & BFS
     // get user input for the vertex they would like to start from when performing the BFS & DFS
-    cout << endl << "Enter the vertex you would like to start from for the DFS & BFS: "; 
+    cout << "Enter the area you would like to start from for the DFS & BFS: "; 
     cin >> startingVertex;
+    cout << endl;
 
     graph.DFS(startingVertex); // DFS() public member function call - performs the DFS according to the user's chosen starting vertex
     graph.BFS(startingVertex); // BFS() public member function call - performs the BFS according to the user's chosen starting vertex
