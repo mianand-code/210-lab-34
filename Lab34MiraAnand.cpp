@@ -187,32 +187,36 @@ public:
 
         while (!pq.empty()) // as long as the priority queue is NOT empty
         {
+            // for lines 191-192, we are able to use .top() because the priority queue always gives "priority" to the shortest distances
+            // - this means that the node with the shortest distance will always be at the "top" of the priority queue
             int node = pq.top().second; // access the node with the shortest distance (by using .top() & .second) and store it in a variable
             int d = pq.top().first; // access the shortest distance value itself (by using .top() & .first) and store it in a variable
-            pq.pop();
+            pq.pop(); // remove the node and its distance from the priority queue by using .pop()
 
+            // perform a check to ensure that the shortest distance possible is being processed for a node
             if (d > dist[node]) 
                 continue;
 
-            for (auto &neighbor : adjList[node]) 
+            for (auto &neighbor : adjList[node]) // traverse through all neighboring nodes of the current node
             {
-                int adjNode = neighbor.first;
-                int weight = neighbor.second;
+                int adjNode = neighbor.first; // access the neighboring node of the current node by using .first and store it in a variable
+                int weight = neighbor.second; // access the edge weight of the current node by using .second and store it in a variable
 
-                if (dist[node] + weight < dist[adjNode]) 
+                if (dist[node] + weight < dist[adjNode]) // check if there is a shorter path to a neighboring node
                 {
-                    dist[adjNode] = dist[node] + weight;
-                    pq.push({dist[adjNode], adjNode});
+                    dist[adjNode] = dist[node] + weight; // if a shorter path was calculated, update the distance
+                    pq.push({dist[adjNode], adjNode}); // add the neighboring node and its newly calculated distance to the priority queue by using .push()
                 }
             }
         }
 
+        // output the shortest paths from the starting node to all other nodes
         for (int i = 0; i < SIZE; i++) 
         {
             if (dist[i] == INF) 
-                cout << start << " -> " << i << " : No path" << endl; 
+                cout << start << " -> " << i << " : No path" << endl; // if a path has not been updated even after performing calculations
             else
-                cout << start << " -> " << i << " : " << dist[i] << endl;
+                cout << start << " -> " << i << " : " << dist[i] << endl; // output the calculated shortest paths
         }
     }
 };
