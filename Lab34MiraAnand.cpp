@@ -236,27 +236,28 @@ public:
         
         key[STARTING_NODE] = 0; // start with node 0 
         // creation of a priority queue data structure
-        // the priority queue ensures that nodes with minimum edge weights are given "priority" and placed at the top of the queue
+        // the priority queue ensures that a node with the smallest minimum edge weight is given "priority" and placed at the top of the queue
         priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
-        pq.push({0, STARTING_NODE});
+        pq.push({0, STARTING_NODE}); // the starting node and its minimum edge weight is added to the priority queue by using .push()
         
-        while (!pq.empty()) 
+        while (!pq.empty()) // as long as the priority queue is NOT empty
         {
-            int u = pq.top().second;
-            pq.pop();
+            int u = pq.top().second; // access the node with the smallest minimum edge weight (by using .top() & .second) and store it in a variable
+            pq.pop(); // remove the node and its minimum edge weight from the priority queue by using .pop()
             
-            inMST[u] = true;
+            inMST[u] = true; // the current node is now included in the minimum spanning tree so set the bool flag to true
             
-            for (auto &neighbor : adjList[u]) 
+            for (auto &neighbor : adjList[u]) // traverse through all neighboring nodes of the current node
             {
-                int v = neighbor.first;
-                int weight = neighbor.second;
+                int v = neighbor.first; // access the neighboring node of the current node by using .first and store it in a variable
+                int weight = neighbor.second; // access the edge weight of the current node by using .second and store it in a variable
                 
+                // if the neighboring node is not yet included in the minimum spanning tree and if a smaller minimum edge weight has been found
                 if (!inMST[v] && weight < key[v]) 
                 {
-                    parent[v] = u; 
-                    key[v] = weight;
-                    pq.push({key[v], v});
+                    parent[v] = u; // update the tree structure
+                    key[v] = weight; // update the minimum edge weight
+                    pq.push({key[v], v}); // 
                 }
             }
         }
