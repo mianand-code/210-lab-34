@@ -285,21 +285,55 @@ int main()
     // constructor within the Graph class is utilized here
     // edges vector is used as the argument/parameter
     Graph graph(edges);
+
+    // declaration of a variable to hold user's menu option number choice
+    int userChoice;
+
+    // creation of a numbered menu that users can choose from to perform actions with the created graph
+    do  // creation of a do-while loop so that the user can continue to select options until they wish to quit
+    {
+        // output for the menu of choices the user can select from
+        cout << endl;
+        cout << "Airport Walking Network Menu:" << endl;
+        cout << endl;
+
+        // user input for menu option number they would like to choose
+        cout << "Enter your choice: "; 
+        cin >> userChoice;
+
+        // creation of a switch statement that handles cases of each numbered option
+        switch (userChoice)
+        {
+            case 1:
+                graph.printGraph(); // printGraph() public member function call - prints the graph's adjacency list
+                break;
+
+            case 2:
+                graph.DFS(startingVertex); // DFS() public member function call - performs the DFS according to the user's chosen starting vertex
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            case 5:
+                break;
+            
+            case 6:
+                cout << "Thank you for using this program. Now exiting..." << endl;
+                break;
+            
+            // user input validation for menu option number (has to be 1-6)
+            default:
+                cout << "ERROR: Invalid entry. Please enter a valid menu option number (1-6) and try again." << endl;
+        }
+
+    } while (userChoice != 6); // userChoice = 6 means user wants to quit program
     
-    // printGraph() public member function call - prints the graph's adjacency list
-    graph.printGraph();
-
-    // short driver program to exercise the BFS & DFS functions
-    int startingVertex; // to hold the user's choice of which vertex they would like to start from for the DFS & BFS
-    // get user input for the vertex they would like to start from when performing the BFS & DFS
-    cout << "Enter the area you would like to start from for the DFS, BFS, and shortest path: "; 
-    cin >> startingVertex;
-    cout << endl;
-
-    graph.DFS(startingVertex); // DFS() public member function call - performs the DFS according to the user's chosen starting vertex
     graph.BFS(startingVertex); // BFS() public member function call - performs the BFS according to the user's chosen starting vertex
     graph.shortestPath(startingVertex); // shortestPath() public member function call - calculates the shortest path from the starting node to all other nodes
-
     graph.minimumSpanningTree(); // minimumSpanningTree() public member function call - generates a minimum spanning tree structure of the graph
     
     return 0;
