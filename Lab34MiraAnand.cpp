@@ -257,11 +257,12 @@ public:
                 {
                     parent[v] = u; // update the tree structure
                     key[v] = weight; // update the minimum edge weight
-                    pq.push({key[v], v}); // 
+                    pq.push({key[v], v}); // add the neighboring node and its newly calculated minimum edge weight to the priority queue by using .push()
                 }
             }
         }
 
+        // output the minimum spanning tree structure that has been formed
         cout << endl << "Minimum Spanning Tree edges:" << endl;
         cout << "---------------------------------" << endl;
         for (int i = 1; i < SIZE; i++) 
@@ -297,9 +298,9 @@ int main()
 
     graph.DFS(startingVertex); // DFS() public member function call - performs the DFS according to the user's chosen starting vertex
     graph.BFS(startingVertex); // BFS() public member function call - performs the BFS according to the user's chosen starting vertex
-    graph.shortestPath(startingVertex);
+    graph.shortestPath(startingVertex); // shortestPath() public member function call - calculates the shortest path from the starting node to all other nodes
 
-    graph.minimumSpanningTree();
+    graph.minimumSpanningTree(); // minimumSpanningTree() public member function call - generates a minimum spanning tree structure of the graph
     
     return 0;
 }
