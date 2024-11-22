@@ -219,6 +219,8 @@ public:
             else
                 cout << start << " -> " << i << " : " << dist[i] << endl; // output the calculated shortest paths
         }
+
+        cout << endl;
     }
 
     // void minimumSpanningTree() public member function header
@@ -263,12 +265,14 @@ public:
         }
 
         // output the minimum spanning tree structure that has been formed
-        cout << endl << "Minimum Spanning Tree edges:" << endl;
+        cout << "Minimum Spanning Tree edges:" << endl;
         cout << "---------------------------------" << endl;
         for (int i = 1; i < SIZE; i++) 
         {
             cout << "Edge from " << parent[i] << " to " << i << " with walk time: " << key[i] << " minutes" << endl;
         }
+
+        cout << endl;
     }
 };
 
@@ -293,9 +297,13 @@ int main()
     do  // creation of a do-while loop so that the user can continue to select options until they wish to quit
     {
         // output for the menu of choices the user can select from
-        cout << endl;
         cout << "Airport Walking Network Menu:" << endl;
         cout << "[1] Display airport walking network" << endl;
+        cout << "[2] Explore the airport (DFS)" << endl;
+        cout << "[3] Find all optimal airport walking paths (BFS)" << endl;
+        cout << "[4] Calculate shortest paths" << endl;
+        cout << "[5] Find Minimum Spanning Tree" << endl;
+        cout << "[6] Exit" << endl;
         cout << endl;
 
         // user input for menu option number they would like to choose
