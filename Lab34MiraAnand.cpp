@@ -295,6 +295,7 @@ int main()
         // output for the menu of choices the user can select from
         cout << endl;
         cout << "Airport Walking Network Menu:" << endl;
+        cout << "[1] Display airport walking network" << endl;
         cout << endl;
 
         // user input for menu option number they would like to choose
@@ -309,18 +310,22 @@ int main()
                 break;
 
             case 2:
-                graph.DFS(startingVertex); // DFS() public member function call - performs the DFS according to the user's chosen starting vertex
+                graph.DFS(STARTING_NODE); // DFS() public member function call - performs the DFS according to the STARTING_NODE global const int variable value
                 break;
 
             case 3:
+                graph.BFS(STARTING_NODE); // BFS() public member function call - performs the BFS according to the STARTING_NODE global const int variable value
                 break;
 
             case 4:
+                graph.shortestPath(STARTING_NODE); // shortestPath() public member function call - calculates the shortest path from the starting node to all other nodes
                 break;
 
             case 5:
+                graph.minimumSpanningTree(); // minimumSpanningTree() public member function call - generates a minimum spanning tree structure of the graph
                 break;
             
+            // menu option # 6 is if the user wants to exit the program
             case 6:
                 cout << "Thank you for using this program. Now exiting..." << endl;
                 break;
@@ -331,10 +336,6 @@ int main()
         }
 
     } while (userChoice != 6); // userChoice = 6 means user wants to quit program
-    
-    graph.BFS(startingVertex); // BFS() public member function call - performs the BFS according to the user's chosen starting vertex
-    graph.shortestPath(startingVertex); // shortestPath() public member function call - calculates the shortest path from the starting node to all other nodes
-    graph.minimumSpanningTree(); // minimumSpanningTree() public member function call - generates a minimum spanning tree structure of the graph
     
     return 0;
 }
